@@ -12,4 +12,4 @@ in your linux home directory using GNU Stow.
 To get the plugins up and running, run ```:PlugInstall``` inside Vim.
 
 ## Removal
-Run ```make delete``` to rmeove the created symlinks.
+Run ```make delete``` to remove the created symlinks.
