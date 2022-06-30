@@ -69,6 +69,10 @@ set history=100
 "Set default foldmethod to indent.
 set foldmethod=indent
 
+" Set cino to line up new line with unclosed paren directly after first
+" opening paren
+set cino+=(0
+
 " Wild Menu settings
 set wildmenu
 " set wildmode=list:longest
@@ -95,9 +99,39 @@ augroup openfolds
     autocmd!
     autocmd BufWinEnter * silent! :%foldopen!
 augroup end
+
+fun! TrimWhitespace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfun
+
+function! IndentIgnoringComments()
+ let in_comment = 0
+  for i in range(1, line('$'))
+    if !in_comment
+      " Check if this line starts a comment
+      if getline(i) =~# '^\s*/\*\*'
+        let in_comment = 1
+      else
+        " Indent line 'i'
+        execute i . "normal =="
+      endif
+    else
+      " Check if this line ends the comment
+      if getline(i) =~# '\*\/\s*$'
+        let in_comment = 0
+      endif
+    endif
+  endfor
+endfunction
+
 " }}}
 
 " PLUGINS ---------------------------------------------------------------- {{{
+
+" Disable vim-polyglot's autoindent as it's causing trouble
+let g:polyglot_disabled = ['autoindent']
 
 call plug#begin('~/.vim/plugged')
 
@@ -105,10 +139,28 @@ Plug 'tomasiser/vim-code-dark'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'sheerun/vim-polyglot'
-'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'junegunn/vim-easy-align'
+
 " Plug 'preservim/nerdtree'
 
 call plug#end()
+
+" }}}
+
+" PLUGIN SETTINGS -------------------------------------------------------- {{{
+
+" Add a custom rule for vim-easy-align
+let g:easy_align_delimiters = {
+\   '\': {
+\       'pattern': '\\',
+\       'delimiter_align': 'l',
+\       'ignore_groups': ['!Comment'],
+\       'left_margin': 4,
+\       'right_margin': 4 },
+\ }
 
 " }}}
 
@@ -121,15 +173,41 @@ colorscheme codedark
 
 " MAPPINGS  ---------------------------------------------------------------- {{{
 
+let mapleader = " "
+
+" Shortcut changing windows
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+" Shortcut to move lines up and down
+nnoremap <leader>sj :m +1<CR>==
+nnoremap <leader>sk :m -2<CR>==
+
 " CtrlP Mappings
 let g:ctrlp_map = '<^p>'
 let g:ctrlp_cmd = 'CtrlP'
 
+" Easy Align Mappings
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+" Search for text in visual selection
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+
+" Add a mapping for checking the hightlight group of object under cursor
+nmap <leader>sp :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
 " }}}
 
 " STATUS LINE ------------------------------------------------------------ {{{
