@@ -133,7 +133,7 @@ endfunction
 " Disable vim-polyglot's autoindent as it's causing trouble
 let g:polyglot_disabled = ['autoindent']
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.local/share/vim/plugged')
 
 Plug 'tomasiser/vim-code-dark'
 Plug 'ctrlpvim/ctrlp.vim'
