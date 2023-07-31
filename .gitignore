@@ -3,3 +3,5 @@
 
 # Vim netrw history
 .netrwhist
+
+packer_compiled.lua
