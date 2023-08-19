@@ -20,6 +20,9 @@ vim.opt.smarttab = true
 -- Do not save backup files.
 vim.opt.backup = false
 
+-- Disable mouse
+vim.opt.mouse = ''
+
 -- Do not let cursor scroll below or above N number of lines when scrolling.
 vim.opt.scrolloff = 10
 
