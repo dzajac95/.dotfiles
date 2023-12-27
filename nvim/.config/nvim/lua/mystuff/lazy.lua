@@ -14,10 +14,10 @@ require("lazy").setup({
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate'
     },
-    {'williamboman/mason.nvim',
-        init = function()
-            require("mason").setup()
-        end},
+    {
+        'williamboman/mason.nvim',
+        config = true,
+    },
     {'williamboman/mason-lspconfig.nvim'},
     {'VonHeikemen/lsp-zero.nvim', branch = 'v3.x'},
     {'neovim/nvim-lspconfig'},
