@@ -22,6 +22,9 @@ vim.keymap.set("x", "<leader>p", "\"_dP")
 -- search text selected in visual mode
 vim.keymap.set("v", "//", "y/\\V<C-R>=escape(@\",'/\')<CR><CR>")
 
+-- replace selected text exactly
+vim.keymap.set("v", "/r", "y:%s/\\<<C-R>\"\\>/")
+
 -- Move between splits easier
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>")
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>")

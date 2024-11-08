@@ -26,15 +26,26 @@ vim.api.nvim_create_user_command("Cmd", function(params)
     vim.api.nvim_buf_set_lines(buf, 0, -1, false, output)
 
     -- Set the buffer to read-only to prevent accidental changes
-    vim.api.nvim_buf_set_option(buf, 'readonly', true)
-    vim.api.nvim_buf_set_option(buf, 'modified', false)
-    vim.api.nvim_buf_set_option(buf, 'modifiable', false)
-    vim.api.nvim_buf_set_option(buf, 'swapfile', false)
-    vim.api.nvim_buf_set_option(buf, 'buftype', 'nofile')
-    vim.api.nvim_buf_set_option(buf, 'bufhidden', 'delete')
+    vim.api.nvim_set_option_value('readonly', true, {buf=buf})
+    vim.api.nvim_set_option_value('modified', false, {buf=buf})
+    vim.api.nvim_set_option_value('modifiable', false, {buf=buf})
+    vim.api.nvim_set_option_value('swapfile', false, {buf=buf})
+    vim.api.nvim_set_option_value('buftype', 'nofile', {buf=buf})
+    vim.api.nvim_set_option_value('bufhidden', 'delete', {buf=buf})
     if is_man then
-        vim.api.nvim_buf_set_option(buf, 'filetype', 'man')
+        vim.api.nvim_set_option_value('filetype', 'man', {buf=buf})
     end
 end,
 {nargs='+'}
+)
+
+-- Open a scratch buffer
+vim.api.nvim_create_user_command("Scratch", function(params)
+    vim.cmd('tabnew ')
+    local buf = vim.api.nvim_get_current_buf()
+    vim.api.nvim_set_option_value('swapfile', false, {buf=buf})
+    vim.api.nvim_set_option_value('buftype', 'nofile', {buf=buf})
+    vim.api.nvim_set_option_value('bufhidden', 'delete', {buf=buf})
+end,
+{}
 )
