@@ -49,3 +49,16 @@ vim.api.nvim_create_user_command("Scratch", function(params)
 end,
 {}
 )
+
+vim.api.nvim_create_user_command("Swap", function(params)
+    local swap = require("swap")
+    local buf = vim.api.nvim_get_current_buf()
+    local cursor = vim.api.nvim_win_get_cursor(0)
+    local row = cursor[1]
+    local col = cursor[2]
+    local line = vim.api.nvim_buf_get_lines(buf, row-1, row, false)[1]
+    local new_line = swap.swap_args(line, col+1)
+    vim.api.nvim_buf_set_lines(buf, row-1, row, false, {new_line})
+end,
+{}
+)
