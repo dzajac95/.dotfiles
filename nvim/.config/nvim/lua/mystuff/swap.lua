@@ -1,13 +1,5 @@
 local mod = {}
 
-local function print_arr(arr)
-    io.write(tostring(arr[1]))
-    for i=2, #arr do
-        io.write(" | " .. tostring(arr[i]))
-    end
-    print()
-end
-
 local function push_bracket(stack, b)
     stack[#stack+1] = b
 end
@@ -27,10 +19,6 @@ end
 
 local function is_closing(b)
     return b == ')' or b == ']' or b == '}'
-end
-
-local function is_bracket(b)
-    return is_opening(b) or is_closing(b)
 end
 
 local function pop_bracket(stack, b)
@@ -148,10 +136,6 @@ mod.swap_args = function(line, col)
     end
     local l_idx = idxs[1]
     local r_idx = idxs[2]
-
-    -- print(line)
-    -- print(string.rep(" ", col-1) .. "|")
-    -- print(string.rep(" ", l_idx-1) .. "^" .. string.rep(" ", r_idx-l_idx-1) .. "^")
 
     local arg_str = string.sub(line, l_idx+1, r_idx-1)
     local arg_col = col - l_idx
