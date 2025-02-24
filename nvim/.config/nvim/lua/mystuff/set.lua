@@ -56,7 +56,7 @@ vim.opt.history = 100
 
 -- Set cino to line up new line with unclosed paren directly after first
 -- opening paren
---set cino+=(0
+vim.opt.cinoptions = ':0,l1,g0,(0,W4,m1")'
 
 -- Wild Menu settings
 vim.opt.wildmenu = true

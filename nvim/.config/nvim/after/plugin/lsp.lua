@@ -13,7 +13,7 @@ require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 
 lsp.setup()
 require('mason-lspconfig').setup({
-    ensure_installed = {},
+    ensure_installed = {'lua_ls', 'clangd', 'basedpyright'},
     handlers = {
         lsp.default_setup,
     },
