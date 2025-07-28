@@ -1,15 +1,20 @@
 require("lazy").setup({
     {
-        'nvim-telescope/telescope.nvim', branch = '0.1.x',
+        'nvim-telescope/telescope-fzf-native.nvim',
+        build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release'
+    },
+    {
+        'nvim-telescope/telescope.nvim',
+        branch = '0.1.x',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
-    {'Mofiqul/vscode.nvim'},
-    {'tpope/vim-repeat'},
-    {'tpope/vim-fugitive'},
-    {'tpope/vim-commentary'},
-    {'tpope/vim-surround'},
-    {'tpope/vim-abolish'},
-    {'junegunn/vim-easy-align'},
+    { 'Mofiqul/vscode.nvim' },
+    { 'tpope/vim-repeat' },
+    { 'tpope/vim-fugitive' },
+    { 'tpope/vim-commentary' },
+    { 'tpope/vim-surround' },
+    { 'tpope/vim-abolish' },
+    { 'junegunn/vim-easy-align' },
     {
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate'
@@ -18,12 +23,12 @@ require("lazy").setup({
         'williamboman/mason.nvim',
         config = true,
     },
-    {'williamboman/mason-lspconfig.nvim'},
-    {'VonHeikemen/lsp-zero.nvim', branch = 'v3.x'},
-    {'neovim/nvim-lspconfig'},
-    {'hrsh7th/cmp-nvim-lsp'},
-    {'hrsh7th/nvim-cmp'},
-    {'L3MON4D3/LuaSnip'},
+    { 'williamboman/mason-lspconfig.nvim' },
+    { 'VonHeikemen/lsp-zero.nvim',        branch = 'v3.x' },
+    { 'neovim/nvim-lspconfig' },
+    { 'hrsh7th/cmp-nvim-lsp' },
+    { 'hrsh7th/nvim-cmp' },
+    { 'L3MON4D3/LuaSnip' },
     {
         "folke/trouble.nvim",
         opts = {}, -- for default options, refer to the configuration section for custom setup.
