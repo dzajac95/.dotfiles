@@ -1,6 +1,7 @@
 -- Add numbers to each line on the left-hand side.
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.opt.signcolumn = "yes"
 
 -- Make cursor always blocky :)
 vim.opt.guicursor = ""

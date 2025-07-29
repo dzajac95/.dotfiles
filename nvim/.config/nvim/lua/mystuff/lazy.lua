@@ -5,6 +5,7 @@ require("lazy").setup({
     },
     {
         'nvim-telescope/telescope.nvim',
+        opts = {},
         branch = '0.1.x',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
@@ -20,12 +21,15 @@ require("lazy").setup({
         build = ':TSUpdate'
     },
     {
-        'williamboman/mason.nvim',
-        config = true,
+        'mason-org/mason-lspconfig.nvim',
+        opts = {
+            ensure_installed = {'lua_ls', 'clangd', 'basedpyright'},
+        },
+        dependencies = {
+            { 'mason-org/mason.nvim', opts = {} },
+            { 'neovim/nvim-lspconfig' },
+        },
     },
-    { 'williamboman/mason-lspconfig.nvim' },
-    { 'VonHeikemen/lsp-zero.nvim',        branch = 'v3.x' },
-    { 'neovim/nvim-lspconfig' },
     { 'hrsh7th/cmp-nvim-lsp' },
     { 'hrsh7th/nvim-cmp' },
     { 'L3MON4D3/LuaSnip' },
