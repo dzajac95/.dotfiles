@@ -10,6 +10,7 @@ require("lazy").setup({
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
     { 'Mofiqul/vscode.nvim' },
+    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
     { 'tpope/vim-repeat' },
     { 'tpope/vim-fugitive' },
     { 'tpope/vim-commentary' },
