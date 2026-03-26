@@ -6,7 +6,7 @@ require("lazy").setup({
     {
         'nvim-telescope/telescope.nvim',
         opts = {},
-        branch = '0.1.x',
+        branch = 'master',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
     { 'Mofiqul/vscode.nvim' },
